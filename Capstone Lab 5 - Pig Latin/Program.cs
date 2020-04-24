@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq; 
+﻿using System; 
 
 namespace Capstone_Lab_5___Pig_Latin
 {
@@ -14,27 +13,13 @@ namespace Capstone_Lab_5___Pig_Latin
 
                 Console.WriteLine("Please enter a word to be translated to Pig Latin! ");
 
-                string usersWord = Console.ReadLine().ToLower();
+                string[] usersWords = Console.ReadLine().ToLower().Split(" ");
 
-                char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
-
-                int index = usersWord.IndexOfAny(vowels);
-
-                string firstLetter = usersWord.Substring(0, index);
-                string restOfLetters = usersWord.Substring(index);
-                string newWord = restOfLetters + firstLetter + "ay";
-
-
-                string newWord2 = usersWord + "way";
-
-                if (index == 0)
+                foreach(string word in usersWords)
                 {
-                    Console.WriteLine(newWord2);
+                    ToPigLatin(word);
                 }
-                else if (index != 0)
-                {
-                    Console.WriteLine(newWord);
-                }
+                
 
                 Console.WriteLine("would you like to translate another word? y/n? ");
 
@@ -48,10 +33,41 @@ namespace Capstone_Lab_5___Pig_Latin
                 {
                     break;
                 }
-                
+
+
             }
-                 Console.WriteLine("Goodbye! ");
+
+            Console.WriteLine("Goodbye! ");
                  //hint: you loop through the vowels array and check the starting letter of the word against them          
+        }
+
+        private static void ToPigLatin(string usersWord)
+        {
+            char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
+
+            int index = usersWord.IndexOfAny(vowels);
+            if (index == -1)
+            {
+                index = 0; 
+            }
+
+            string firstLetter = usersWord.Substring(0, index);
+            string restOfLetters = usersWord.Substring(index);
+
+
+            string newWord = restOfLetters + firstLetter + "ay";
+
+
+            string newWord2 = usersWord + "way";
+
+            if (index == 0)
+            {
+                Console.WriteLine(newWord2);
+            }
+            else if (index != 0)
+            {
+                Console.WriteLine(newWord);
+            }
         }
     }
 }
